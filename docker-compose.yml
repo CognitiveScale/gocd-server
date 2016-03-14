@@ -1,13 +1,13 @@
 version: '2'
 services:
   gocd-server:
-      image: gocd-server
+      image: c12e/gocd-server
       ports:
         - 8152:8152
         - 8153:8153
         - 8154:8154
   gocd-agent:
-    image: gocd-agent
+    image: c12e/gocd-agent
     privileged: true
     volumes:
       - static_content:/static
