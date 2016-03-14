@@ -1,0 +1,22 @@
+version: '2'
+services:
+  gocd-server:
+      image: gocd-server
+      ports:
+        - 8152:8152
+        - 8153:8153
+        - 8154:8154
+  gocd-agent:
+    image: gocd-agent
+    privileged: true
+    volumes:
+      - static_content:/static
+      - /var/run/docker.sock:/var/run/docker.sock
+    links:
+      - gocd-server:go-server
+
+volumes:
+# this is secret stuff we want to copy to each agent..
+# for example .sbt, .pyrc, .ssh
+  static_content:
+    driver: local
