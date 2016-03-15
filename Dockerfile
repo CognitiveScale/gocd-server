@@ -1,6 +1,8 @@
 # Build using: docker build -f Dockerfile.gocd-agent -t gocd-agent .
-FROM c12e/consul-template 
+FROM c12e/consul-template:0.14.0
 Add deploy/run.sh /run.sh
+Add deploy/*.ctmpl  /consul-template/templates/
+Add deploy/gocd-server.json /consul-template/config.d/gocd-server.json
 RUN apk --no-cache add bash unzip openjdk8-jre-base git curl openssh jq \
 && SERVER_VER=16.2.1-3027 \
 && curl https://download.go.cd/binaries/${SERVER_VER}/generic/go-server-${SERVER_VER}.zip  -o /tmp/go-server.zip \
