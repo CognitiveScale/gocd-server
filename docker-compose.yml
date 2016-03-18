@@ -4,34 +4,20 @@ services:
     image: c12e/gocd-server
     environment:
       - VAULT_TOKEN=${VAULT_TOKEN}
+      - CONSUL_TOKEN=${CONSUL_TOKEN}
     ports:
       - 8152:8152
       - 8153:8153
       - 8154:8154
-    external_links:
-      - baseband_consul_1:consul.service.consul
-      - baseband_vault_1:vault.service.consul
      
   gocd-agent:
     image: c12e/gocd-agent
     privileged: true
     environment:
       - VAULT_TOKEN=${VAULT_TOKEN}
+      - CONSUL_TOKEN=${CONSUL_TOKEN}
     volumes:
-      - static_content:/static
       - /var/run/docker.sock:/var/run/docker.sock
 # - /bin/dock.static:/bin/docker 
     links:
       - gocd-server:go-server
-    external_links:
-      - baseband_consul_1:consul.service.consul
-      - baseband_vault_1:vault.service.consul
-volumes:
-# this is secret stuff we want to copy to each agent..
-# for example .sbt, .pyrc, .ssh
-  static_content:
-    driver: local
-networks:
-  default:
-    external:
-      name: baseband_default
