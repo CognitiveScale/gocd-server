@@ -4,7 +4,7 @@ Add deploy/run.sh /run.sh
 Add deploy/*.ctmpl  /consul-template/templates/
 Add deploy/gocd-server.json /consul-template/config.d/gocd-server.json
 RUN apk --no-cache add bash unzip openjdk8-jre-base git curl openssh jq \
-&& SERVER_VER=16.2.1-3027 \
+&& SERVER_VER=16.3.0-3183 \
 && curl https://download.go.cd/binaries/${SERVER_VER}/generic/go-server-${SERVER_VER}.zip  -o /tmp/go-server.zip \
 && mkdir -p /opt \
 && cd /opt \

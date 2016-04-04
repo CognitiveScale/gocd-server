@@ -1,14 +1,10 @@
-consul = "consul.service.consul:8500"
 log_level = "info"
 
 vault {
-  address = "https://consul.service.consul:8200"
 // token is from VAULT_TOKEN env variable..
   renew = true
   ssl {
     enabled = true
-    verify  = false
-    ca_cert = "/etc/pki/tls/certs/ca-bundle.crt"
   }
 }
 

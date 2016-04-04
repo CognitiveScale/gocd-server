@@ -1,22 +1,22 @@
 gocd-server:
-   image: c12e/gocd-server
-   environment:
-     - VAULT_TOKEN=${VAULT_TOKEN}
-   ports:
-     - 8152:8152
-     - 8153:8153
-     - 8154:8154
-   volumes:
-     - /etc/pki/tls/certs/ca-bundle.crt:/etc/pki/tls/certs/ca-bundle.crt
-
+    image: c12e/gocd-server
+    environment:
+      - VAULT_ADDR=${VAULT_ADDR}
+      - VAULT_TOKEN=${VAULT_TOKEN}
+    ports:
+      - 8152:8152
+      - 8153:8153
+      - 8154:8154
+    volumes:
+      - shared_certs:/cscerts
 gocd-agent:
    image: c12e/gocd-agent
-   privileged: true
    environment:
+     - VAULT_ADDR=${VAULT_ADDR}
      - VAULT_TOKEN=${VAULT_TOKEN}
    volumes:
      - /var/run/docker.sock:/var/run/docker.sock
      - /bin/dock.static:/bin/docker
-     - /etc/pki/tls/certs/ca-bundle.crt:/etc/pki/tls/certs/ca-bundle.crt
+     - shared_certs:/cscerts
    links:
-     - gocd-server:go-server
+      - gocd-server:go-server
