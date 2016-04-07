@@ -35,5 +35,8 @@ if [ ! -z "${VAULT_ADDR}" ]; then
   setup_certs_java
 
 fi
+mkdir -p /data/config /data/logs                                                                                      
+ln -s /data/config /etc/go                                                                                            
+ln -s /data/logs /var/log/go-server       
 consul-template -config=/consul-template/config.d/gocd-server.json -once
 exec /opt/go-server/server.sh

@@ -14,5 +14,5 @@ RUN apk --no-cache add bash unzip openjdk8-jre-base git curl openssh jq \
 && rm -r /tmp/*
 ENV JAVA_HOME=/usr/lib/jvm/default-jvm/jre
 WORKDIR /tmp
-VOLUME ["/opt/go-server/config"]
+VOLUME ["/data"]
 CMD ["/run.sh"]
