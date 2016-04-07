@@ -1,6 +1,7 @@
 gocd-server:
     image: c12e/gocd-server
     environment:
+      - CONSUL_ADDR=consul.service.consul:8500
       - VAULT_ADDR=${VAULT_ADDR}
       - VAULT_TOKEN=${VAULT_TOKEN}
     ports:
@@ -12,6 +13,7 @@ gocd-server:
 gocd-agent:
    image: c12e/gocd-agent
    environment:
+     - CONSUL_ADDR=consul.service.consul:8500
      - VAULT_ADDR=${VAULT_ADDR}
      - VAULT_TOKEN=${VAULT_TOKEN}
    volumes:
