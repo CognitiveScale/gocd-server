@@ -4,7 +4,7 @@ vault {
 // token is from VAULT_TOKEN env variable..
   renew = true
   ssl {
-    enabled = true
+    enabled = false
   }
 }
 
