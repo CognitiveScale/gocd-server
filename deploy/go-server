@@ -1,0 +1,5 @@
+export GO_SERVER_SYSTEM_PROPERTIES="-Dgo.ssl.ciphers.include='TLS_ECDHE.*'\
+ -Dgo.ssl.ciphers.exclude='.*NULL.*,.*RC4.*'\
+ -Dgo.ssl.protocols.include='TLSv1.2'\
+ -Dgo.ssl.protocols.exclude='SSLv3'\
+ -Dgo.ssl.renegotiation.allowed='N'"

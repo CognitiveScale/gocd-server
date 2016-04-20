@@ -42,12 +42,8 @@ Here is a list of known paths/keys for setup in vault
 
 | Path | Key(s) | Description|
 |---- | ---| --------|	
-| secret/gocd | gitssh | The ssh private key to access github |
-| secret/gocd/dockerhub | auth, email | The dockerhub credentials from `docker login` |
-| secret/gocd/artifactory | username, password | The artifactory credentials for sbt |
-| secret/gocd/npmrc | ???? | The artifactory access token for NPM |
+| secret/gocd | rootfs | docker exec -it gocdserver_vault_1 sh -c "VAULT_TOKEN=<TOKEN> vault write /secret/gocd rootfs=$(base64 root.tgz)" tore a tar of secrets |
  
-*TODO:* simplify the vault+consul script and encode more config in vault to avoid rev'ing the container for each new file.. For example store the file and encode the file name/path.
 
 5. Start the gocd compose file..
  		
@@ -56,9 +52,3 @@ Here is a list of known paths/keys for setup in vault
  		docker-compose up -d
  		
 
-	 		
- 
- 	
-
-
-    

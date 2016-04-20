@@ -19,24 +19,50 @@ setup_certs_java() {
   fi
 }
 get_certs_vault() {
+    CRT_FILE=$1
+    KEY_FILE=$2
     curl -H "X-Vault-Token: $VAULT_TOKEN" -X POST \
     -d "{\"common_name\":\"neo4j\",\"alt_names\":\"neo4j.service.consul,$HOSTNAME\",\"ip_sans\":\"127.0.0.1\",\"format\":\"pem\"}" \
-    https://${VAULT_ADDR}:8200/v1/pki/issue/c12e-dot-local  > /tmp/certs.json
+    ${VAULT_ADDR}/v1/pki/issue/c12e-dot-local  > /tmp/certs.json
     mkdir -p  /opt/neo4j/conf/ssl
-    jq -r .data.private_key /tmp/certs.json | openssl rsa  -inform PEM -outform DER > /opt/neo4j/conf/ssl/snakeoil.key
-    jq -r .data.certificate /tmp/certs.json > /opt/neo4j/conf/ssl/snakeoil.cert
-    rm /tmp/certs.json
+    jq -r .data.private_key /tmp/certs.json > $KEY_FILE
+    jq -r .data.certificate /tmp/certs.json > $CRT_KEY
 }
-if [ ! -z "${HTTPS}" ]; then
+get_secrets() {
+    cd /
+    curl -H "X-Vault-Token: $VAULT_TOKEN" -X GET \
+    ${VAULT_ADDR}/v1/secret/gocd\
+      | jq -r .data.rootfs\
+      | base64 -d\
+      | tar xz
+    [ ! -f /root/.ssh/known_host ] && ssh-keyscan github.com >> /root/.ssh/known_hosts
+}
+
+wait_for() {
+  local proto="$(echo $1 | grep :// | sed -e's,^\(.*://\).*,\1,g')"
+  local url="$(echo ${1/$proto/})"
+  local user="$(echo $url | grep @ | cut -d@ -f1)"
+  host_port="$(echo ${url/$user@/} | cut -d/ -f1)"
+  host=$(echo $host_port | cut -d: -f1)
+  port=$(echo $host_port | cut -d: -f2)
+  echo "Waiting for ${host} on ${port}"
+  while ! nc -z ${host} ${port} &> /dev/null; do
+    sleep 1
+    echo -n "."
+  done
+}
+if [ ! -z "${VAULT_ADDR}" ]; then
+  wait_for "$VAULT_ADDR"
   echo "Installing keys from ${CERTS_DIR} to /etc/ssl"
   setup_certs
 
   echo "Installing keys from ${CERTS_DIR} to java"
   setup_certs_java
 
+  get_certs_vault /tmp/cert.pem /tmp/key.pem
+  get_secrets
 fi
-mkdir -p /data/config /data/logs                                                                                      
-ln -s /data/config /etc/go                                                                                            
-ln -s /data/logs /var/log/go-server       
-consul-template -config=/consul-template/config.d/gocd-server.json -once
+mkdir -p /data/config /data/logs
+ln -s /data/config /etc/go
+ln -s /data/logs /var/log/go-server
 exec /opt/go-server/server.sh
