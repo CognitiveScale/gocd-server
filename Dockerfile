@@ -17,7 +17,7 @@ RUN LAYER=plugins \
   && cd /opt/go-server/plugins/external \
   && wget https://github.com/Vincit/gocd-slack-task/releases/download/v1.2/gocd-slack-task-1.2.jar \
   && wget https://github.com/gocd-contrib/script-executor-task/releases/download/0.2/script-executor-0.2.jar \
-  && wget https://github.com/ashwanthkumar/gocd-slack-build-notifier/releases/download/v1.2.1/gocd-slack-notifier-1.2.1.jar \
+  && wget https://github.com/ashwanthkumar/gocd-slack-build-notifier/releases/download/v1.2.2/gocd-slack-notifier-1.2.2.jar \
   && wget https://github.com/ashwanthkumar/gocd-build-github-pull-requests/releases/download/v1.2.4/github-pr-poller-1.2.4.jar \
   && wget https://github.com/ashwanthkumar/gocd-build-github-pull-requests/releases/download/v1.2.4/git-fb-poller-1.2.4.jar \
   && wget https://github.com/gocd-contrib/gocd-oauth-login/releases/download/v1.2/github-oauth-login-1.2.jar \
