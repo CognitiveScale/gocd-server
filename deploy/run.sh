@@ -62,7 +62,7 @@ if [ ! -z "${VAULT_ADDR}" ]; then
   get_certs_vault /tmp/cert.pem /tmp/key.pem
   get_secrets
 fi
-mkdir -p /data/config /data/logs /data/db /data/artifacts /opt/go-server/db /opt/go-server/artifacts
+mkdir -p /data/config /data/logs /data/db /data/artifacts
 ln -s /data/db /opt/go-server/db
 ln -s /data/artifacts /opt/go-server/artifacts
 ln -s /data/config /etc/go
