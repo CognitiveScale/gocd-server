@@ -20,7 +20,8 @@ RUN LAYER=plugins \
   && wget https://github.com/ashwanthkumar/gocd-slack-build-notifier/releases/download/v1.2.1/gocd-slack-notifier-1.2.1.jar \
   && wget https://github.com/ashwanthkumar/gocd-build-github-pull-requests/releases/download/v1.2.4/github-pr-poller-1.2.4.jar \
   && wget https://github.com/ashwanthkumar/gocd-build-github-pull-requests/releases/download/v1.2.4/git-fb-poller-1.2.4.jar \
-  && wget https://github.com/gocd-contrib/gocd-oauth-login/releases/download/v1.2/github-oauth-login-1.2.jar
+  && wget https://github.com/gocd-contrib/gocd-oauth-login/releases/download/v1.2/github-oauth-login-1.2.jar \
+  && wget https://github.com/gocd-contrib/gocd-build-status-notifier/releases/download/1.1/github-pr-status-1.1.jar
 
 ENV JAVA_HOME=/usr/lib/jvm/default-jvm/jre
 STOPSIGNAL HUP
