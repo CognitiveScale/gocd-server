@@ -62,9 +62,17 @@ if [ ! -z "${VAULT_ADDR}" ]; then
   get_certs_vault /tmp/cert.pem /tmp/key.pem
   get_secrets
 fi
-mkdir -p /data/config /data/logs /data/db /data/artifacts
-ln -s /data/db /opt/go-server/db
-ln -s /data/artifacts /opt/go-server/artifacts
-ln -s /data/config /etc/go
-ln -s /data/logs /var/log/go-server
+
+# symlink persistent data from /data 
+for dir in /opt/go-server/artifacts /opt/go-server/dba /etc/go /var/log/go-server;
+do
+  data_dir=/data/$(basename $dir)
+  mkdir -p $data_dir
+
+  if [ ! -e $dir ] && [ -d $data_dir ]; 
+  then
+    ln -s $data_dir $dir
+  fi
+done 
+
 exec /opt/go-server/server.sh
