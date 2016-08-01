@@ -2,7 +2,7 @@
 
 CERTS_DIR=/cscerts
 setup_certs() {
-  "${CERTS_DIR:?Need to set CERTS_DIR non-empty}"
+ : "${CERTS_DIR:?Need to set CERTS_DIR non-empty}"
   if [ -f "${CERTS_DIR}/ca.cert.pem" ]; then
     cp ${CERTS_DIR}/*.cert.pem /usr/local/share/ca-certificates
     update-ca-certificates
@@ -11,7 +11,7 @@ setup_certs() {
   fi
 }
 setup_certs_java() {
-  "${CERTS_DIR:?Need to set CERTS_DIR non-empty}"
+  : "${CERTS_DIR:?Need to set CERTS_DIR non-empty}"
   if [ -f "${CERTS_DIR}/ca-chain.cert.pem" ]; then
   keytool -import \
     -storepass changeit -noprompt \
@@ -24,12 +24,12 @@ setup_certs_java() {
 get_certs_vault() {
     CRT_FILE=$1
     KEY_FILE=$2
-    "${CRT_FILE:?Need to set CRT_FILE non-empty}"
-    "${KEY_FILE:?Need to set KEY_FILE non-empty}"
+    : "${CRT_FILE:?Need to set CRT_FILE non-empty}"
+    : "${KEY_FILE:?Need to set KEY_FILE non-empty}"
 
-    "${VAULT_TOKEN:?Need to set VAULT_TOKEN non-empty}"
-    "${HOSTNAME:?Need to set HOSTNAME non-empty}"
-    "${VAULT_ADDR:?Need to set VAULT_ADDR non-empty}"
+    : "${VAULT_TOKEN:?Need to set VAULT_TOKEN non-empty}"
+    : "${HOSTNAME:?Need to set HOSTNAME non-empty}"
+    : "${VAULT_ADDR:?Need to set VAULT_ADDR non-empty}"
 
     curl -H "X-Vault-Token: $VAULT_TOKEN" -X POST \
     -d "{\"common_name\":\"neo4j\",\"alt_names\":\"neo4j.service.consul,$HOSTNAME\",\"ip_sans\":\"127.0.0.1\",\"format\":\"pem\"}" \
@@ -39,8 +39,8 @@ get_certs_vault() {
     jq -r .data.certificate /tmp/certs.json > ${CRT_KEY}
 }
 get_secrets() {
-    "${VAULT_TOKEN:?Need to set VAULT_TOKEN non-empty}"
-    "${VAULT_ADDR:?Need to set VAULT_ADDR non-empty}"
+    : "${VAULT_TOKEN:?Need to set VAULT_TOKEN non-empty}"
+    : "${VAULT_ADDR:?Need to set VAULT_ADDR non-empty}"
 
     cd /
     curl -H "X-Vault-Token: $VAULT_TOKEN" -X GET \
@@ -52,7 +52,7 @@ get_secrets() {
 }
 
 wait_for() {
-  "${VAULT_ADDR:?Need to set VAULT_ADDR non-empty}"
+  : "${VAULT_ADDR:?Need to set VAULT_ADDR non-empty}"
   local proto="$(echo $1 | grep :// | sed -e's,^\(.*://\).*,\1,g')"
   local url="$(echo ${1/${proto}/})"
   local user="$(echo ${url} | grep @ | cut -d@ -f1)"
