@@ -1,4 +1,4 @@
-# Go Constinous Delivery Server
+# Go Continuous Delivery Server
 
 The following are the containers used in the docker-compose.yml for the server
 
@@ -6,7 +6,7 @@ The following are the containers used in the docker-compose.yml for the server
 | --------- | --------------- | ----------- |
 | **gocd-server** | [c12e/gocd-server](https://hub.docker.com/r/c12e/gocd-server/)|[cognitivescale/gocd-server](https://github.com/cognitivescale/gocd-server) |
 | **gocd-agent** | [c12e/gocd-agent](https://hub.docker.com/r/c12e/gocd-agent/)|[cognitivescale/gocd-agent](https://github.com/cognitivescale/gocd-agent) |
-| **selenium-hub** | [selenium/slenium-hub](https://hub.docker.com/r/selenium/hub/)|[SeleniumHQ/docker-selenium](https://github.com/SeleniumHQ/docker-selenium) |
+| **selenium-hub** | [selenium/selenium-hub](https://hub.docker.com/r/selenium/hub/)|[SeleniumHQ/docker-selenium](https://github.com/SeleniumHQ/docker-selenium) |
 | **node-chrome** | [selenium/node-chrome](https://hub.docker.com/r/selenium/node-chrome/)|[SeleniumHQ/docker-selenium](https://github.com/SeleniumHQ/docker-selenium) |
 | **node-firefox** | [selenium/node-firefox](https://hub.docker.com/r/selenium/node-firefox/)|[SeleniumHQ/docker-selenium](https://github.com/SeleniumHQ/docker-selenium) |
 | **consul** | [gliderlabs/consul-server](https://hub.docker.com/r/gliderlabs/consul-server/)| |
