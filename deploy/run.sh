@@ -35,7 +35,8 @@ get_secrets() {
       | jq -r .data.rootfs\
       | base64 -d\
       | tar xz
-    [ ! -f /root/.ssh/known_host ] && ssh-keyscan github.com >> /root/.ssh/known_hosts
+    [ ! -f /root/.ssh/known_host ] && ssh-keyscan github.com >> /root/.ssh/known_hosts \
+        && ssh-keyscan bitbucket.org >> /root/.ssh/known_hosts
 }
 
 wait_for() {
