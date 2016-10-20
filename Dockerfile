@@ -1,5 +1,7 @@
 # Build using: docker build -f Dockerfile.gocd-agent -t gocd-agent .
 FROM c12e/consul-template:0.15.0
+Add deploy/run.sh /run.sh
+Add deploy/go-server /etc/default/go-server
 RUN apk --no-cache add bash unzip openjdk8-jre-base git curl openssh jq \
 && SERVER_VER=16.10.0-4131 \
 && curl https://download.go.cd/binaries/${SERVER_VER}/generic/go-server-${SERVER_VER}.zip  -o /tmp/go-server.zip \
@@ -11,8 +13,6 @@ RUN apk --no-cache add bash unzip openjdk8-jre-base git curl openssh jq \
 && mkdir -p /opt/go-server/plugins/external \
 
 && rm -r /tmp/*
-Add deploy/run.sh /run.sh
-Add deploy/go-server /etc/default/go-server
 RUN LAYER=plugins \
   && cd /opt/go-server/plugins/external \
   && wget https://github.com/Vincit/gocd-slack-task/releases/download/v1.2/gocd-slack-task-1.2.jar \
