@@ -76,4 +76,5 @@ do
   fi
 done 
 
+exec /hc/health.sh &
 exec /opt/go-server/server.sh
