@@ -2,7 +2,7 @@
 FROM c12e/consul-template:0.15.0
 RUN apk --no-cache add bash unzip openjdk8-jre-base git curl openssh jq \
 && SERVER_VER=16.10.0-4131 \
-&& curl https://download.go.cd/binaries/${SERVER_VER}/generic/go-server-${SERVER_VER}.zip  -o /tmp/go-server.zip \
+&& curl https://download.gocd.io/binaries/${SERVER_VER}/generic/go-server-${SERVER_VER}.zip  -o /tmp/go-server.zip \
 && mkdir -p /opt \
 && cd /opt \
 && unzip /tmp/go-server.zip \
