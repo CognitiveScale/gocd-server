@@ -16,12 +16,13 @@ Add deploy/go-server /etc/default/go-server
 RUN LAYER=plugins \
   && cd /opt/go-server/plugins/external \
   && wget https://github.com/Vincit/gocd-slack-task/releases/download/v1.2/gocd-slack-task-1.2.jar \
-  && wget https://github.com/gocd-contrib/script-executor-task/releases/download/0.2/script-executor-0.2.jar \
+  && wget https://github.com/gocd-contrib/script-executor-task/releases/download/0.3/script-executor-0.3.0.jar \
   && wget https://github.com/ashwanthkumar/gocd-slack-build-notifier/releases/download/v1.4.0-RC7/gocd-slack-notifier-1.4.0-RC7.jar \
   && wget https://github.com/ashwanthkumar/gocd-build-github-pull-requests/releases/download/v1.2.4/github-pr-poller-1.2.4.jar \
   && wget https://github.com/ashwanthkumar/gocd-build-github-pull-requests/releases/download/v1.2.4/git-fb-poller-1.2.4.jar \
   && wget https://github.com/gocd-contrib/gocd-oauth-login/releases/download/v2.0/github-oauth-login-2.0.jar \
-  && wget https://github.com/gocd-contrib/gocd-build-status-notifier/releases/download/1.2/github-pr-status-1.2.jar
+  && wget https://github.com/gocd-contrib/gocd-build-status-notifier/releases/download/1.2/github-pr-status-1.2.jar \
+  && wget https://github.com/tomzo/gocd-yaml-config-plugin/releases/download/0.4.0/yaml-config-plugin-0.4.0.jar
 ENV JAVA_HOME=/usr/lib/jvm/default-jvm/jre
 STOPSIGNAL HUP
 WORKDIR /tmp
