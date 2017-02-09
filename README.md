@@ -1,4 +1,4 @@
-# Go Constinous Delivery Server
+# Go Continuous Delivery Server
 
 The following are the containers used in the docker-compose.yml for the server
 
