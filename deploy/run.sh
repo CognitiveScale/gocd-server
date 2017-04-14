@@ -65,7 +65,7 @@ if [ ! -z "${VAULT_ADDR}" ]; then
 fi
 
 # symlink persistent data from /data 
-for dir in /opt/go-server/artifacts /opt/go-server/dba /etc/go /var/log/go-server;
+for dir in /opt/go-server/artifacts /opt/go-server/dba /etc/go /var/log/go-server /opt/go-server/db;
 do
   data_dir=/data/$(basename $dir)
   mkdir -p $data_dir
