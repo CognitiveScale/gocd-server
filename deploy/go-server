@@ -1,4 +1,8 @@
-export GO_SERVER_SYSTEM_PROPERTIES="-Dgo.ssl.ciphers.include='TLS_ECDHE.*'\
+export GO_SERVER_SYSTEM_PROPERTIES="-Xms1024m\
+ -Xmx2048m\
+ -XX:PermSize=256m\
+ -XX:MaxPermSize=512m\
+ -Dgo.ssl.ciphers.include='TLS_ECDHE.*'\
  -Dgo.ssl.ciphers.exclude='.*NULL.*,.*RC4.*'\
  -Dgo.ssl.protocols.include='TLSv1.2'\
  -Dgo.ssl.protocols.exclude='SSLv3'\
